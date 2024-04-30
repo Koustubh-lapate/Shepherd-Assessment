@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
-import Header from './Header';
 import Navigation from './Navigation';
 import WeeklySummary from './WeeklySummary';
-import Ask from './Ask';
 import Performance from './Performance';
 import Notes from './Notes';
+import HomeIcon from '@mui/icons-material/Home';
+import SearchIcon from '@mui/icons-material/Search';
+import ChatIcon from '@mui/icons-material/Chat';
+import Typography from '@mui/material/Typography';
+import WeatherIcon from './WeatherIcon'; // Import WeatherIcon component
 
 const App = () => {
   const [activeNavItem, setActiveNavItem] = useState('Home'); // Track active navigation item
@@ -17,15 +20,27 @@ const App = () => {
 
   return (
     <div className="App">
-      <Header />
       <div style={{ display: 'flex' }}>
         <Navigation items={navigationItems} onNavigationClick={handleNavigationClick} activeNavItem={activeNavItem} />
-        <main style={{ flex: 1, padding: 20 }}>
-          {/* Content area for other sections */}
-          <WeeklySummary />
-          <Ask />
-          <Performance />
-          <Notes />
+        <main style={{ display: 'flex', flexDirection: 'row', marginLeft: 20 }}>
+          <div style={{ marginRight: 20 }}>
+            <div style={{ marginTop: 10 }}>
+              <Typography variant="h6" gutterBottom>
+                Hi Liam, Welcome Back!
+              </Typography>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <WeatherIcon weather="cloudy" />
+                <Typography variant="body2" color="textSecondary" style={{ marginLeft: 5 }}>
+                  {new Date().toLocaleDateString('en-US', { weekday: 'long' })}, {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric' })}, {new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false })}
+                </Typography>
+              </div>
+            </div>
+            <WeeklySummary />
+          </div>
+          <div style={{ flex: 1 }}>
+            <Performance />
+            <Notes />
+          </div>
         </main>
       </div>
     </div>
